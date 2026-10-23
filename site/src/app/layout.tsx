@@ -20,11 +20,13 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <script dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} />
       </head>
       <body>
-        <SampleDataBanner />
-        <header className="site-header">
-          <p className="site-title">Control Plane for ECK</p>
-          <ThemeToggle />
-        </header>
+        <div className="sticky-top-stack">
+          <SampleDataBanner />
+          <header className="site-header">
+            <p className="site-title">Control Plane for ECK</p>
+            <ThemeToggle />
+          </header>
+        </div>
         <main>{children}</main>
       </body>
     </html>

@@ -86,13 +86,16 @@
   box-sizing: border-box;
 }
 
-html,
+html {
+  max-width: 100vw;
+}
+
+/* overflow-x: hidden on BOTH html and body breaks position: sticky in
+   Chromium (it stops treating the viewport as the sticky containing
+   block past the first screen height) — set it on body only. */
 body {
   max-width: 100vw;
   overflow-x: hidden;
-}
-
-body {
   margin: 0;
   background: var(--surface-page);
   color: var(--text-primary);
@@ -109,12 +112,21 @@ a {
   color: var(--series-1);
 }
 
-/* ---------- sample-data banner ---------- */
+/* ---------- sticky top stack ----------
+   The banner and header are two sibling blocks that both need to stay
+   pinned to the viewport top. A sticky element's containing block is its
+   nearest scrolling ancestor, not its sibling's box, so giving each one
+   its own `position: sticky; top: 0` makes them overlap instead of stack.
+   Stick the WRAPPER once instead; the banner and header stack normally
+   inside it. */
 
-.sample-banner {
+.sticky-top-stack {
   position: sticky;
   top: 0;
   z-index: 50;
+}
+
+.sample-banner {
   background: var(--status-warning);
   color: #0b0b0b;
   text-align: center;
@@ -129,9 +141,6 @@ a {
 /* ---------- header ---------- */
 
 .site-header {
-  position: sticky;
-  top: 0;
-  z-index: 40;
   display: flex;
   align-items: center;
   justify-content: space-between;

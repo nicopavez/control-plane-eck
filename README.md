@@ -1,12 +1,26 @@
 # control-plane-eck
 
+[![Node](https://img.shields.io/badge/node-20%2B-blue)](https://nodejs.org/)
+[![TypeScript](https://img.shields.io/badge/typescript-strict-blue)](tsconfig.base.json)
+[![Tests](https://img.shields.io/badge/tests-62%20passing-brightgreen)](packages/api/src)
+[![License](https://img.shields.io/badge/license-MIT-lightgrey)](LICENSE)
+[![Status](https://img.shields.io/badge/status-work%20in%20progress-orange)](#whats-here)
+[![Live demo](https://img.shields.io/badge/live%20demo-GitHub%20Pages-2a78d6)](https://nicopavez.github.io/control-plane-eck/)
+
 A Senior PM interview take-home: install and analyze Elastic Cloud on Kubernetes
 (ECK), then build a working, API-first prototype that lets an operator manage the
 resulting Elasticsearch cluster without writing YAML or running kubectl.
 
-**Status: work in progress.** The findings and charts below are placeholders until
-Task 1 is actually run (see `setup/`) and the prototype is exercised against a real
-cluster. Nothing here claims to be a finished result yet.
+**[Open the presentation site](https://nicopavez.github.io/control-plane-eck/)**
+(once GitHub Pages is enabled on this repo — see below). It's still showing sample
+data until Task 1 is actually run.
+
+[![The presentation site, scrolled to the install journey section](docs/screenshots/hero.png)](https://nicopavez.github.io/control-plane-eck/)
+
+**Status: work in progress.** The findings and charts above and below are
+placeholders until Task 1 is actually run (see `setup/`) and the prototype is
+exercised against a real cluster. Nothing here claims to be a finished result yet.
+This project is not affiliated with or endorsed by Elastic.
 
 ## What's here
 
@@ -47,6 +61,12 @@ Docker daemon there).
 5. `npm run dev --workspace=packages/api` to start the API, then
    `npm run dev --workspace=packages/tui` for the terminal client, or
    `npm run dev --workspace=site` for the presentation site.
+
+## Deploying the presentation site
+
+`.github/workflows/pages.yml` builds and deploys `site/` to GitHub Pages on every
+push to `main`. One-time setup: in this repo's Settings -> Pages, set **Source** to
+**GitHub Actions**. After that the live-demo link above stays current automatically.
 
 ## Security notes
 
