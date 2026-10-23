@@ -41,6 +41,10 @@ export class ControlPlaneClient {
       }))) as ApiErrorBody;
       throw new ControlPlaneApiError(res.status, body);
     }
+    // A 204 (e.g. deleteIndex, typed Promise<void>) has no body to parse.
+    if (res.status === 204) {
+      return undefined as T;
+    }
     return (await res.json()) as T;
   }
 
