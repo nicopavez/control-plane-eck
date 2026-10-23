@@ -4,17 +4,24 @@ const loadFromFile = vi.fn();
 const loadFromDefault = vi.fn();
 const makeApiClient = vi.fn((ctor: unknown) => ({ ctor }));
 
-vi.mock("@kubernetes/client-node", async (importOriginal) => {
-  const actual = await importOriginal<typeof import("@kubernetes/client-node")>();
-  return {
-    ...actual,
-    KubeConfig: vi.fn().mockImplementation(() => ({
-      loadFromFile,
-      loadFromDefault,
-      makeApiClient,
-    })),
-  };
-});
+// Deliberately NOT using `importOriginal` + spread here: loading the real
+// @kubernetes/client-node module (which pulls in undici's HTTP machinery)
+// crashes under some Node versions with an unrelated vitest/undici mocking
+// bug ("Cannot read properties of undefined (reading 'bind')" in
+// interceptor/decompress.js). createK8sContext only ever passes
+// CoreV1Api/CustomObjectsApi through to the (also mocked) makeApiClient as
+// opaque constructor references, so plain stand-ins are enough here; a real
+// ApiException is only needed by the error-mapping tests in k8s.test.ts.
+vi.mock("@kubernetes/client-node", () => ({
+  KubeConfig: vi.fn().mockImplementation(() => ({
+    loadFromFile,
+    loadFromDefault,
+    makeApiClient,
+  })),
+  CoreV1Api: class CoreV1Api {},
+  CustomObjectsApi: class CustomObjectsApi {},
+  ApiException: class ApiException extends Error {},
+}));
 
 describe("createK8sContext", () => {
   it("loads the kubeconfig from the configured file when KUBECONFIG is set", async () => {
