@@ -28,3 +28,9 @@ interview_script.md
 qa-prep.md
 speaker-notes.md
 site/tsconfig.tsbuildinfo
+
+# deliverable docs, untracked until they have real content (not templates) —
+# see HANDOFF.md for what's left to fill in; un-gitignore once they're real
+docs/task1-install-analysis.md
+docs/prototype-scope.md
+docs/presentation-outline.md
