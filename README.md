@@ -15,8 +15,6 @@ resulting Elasticsearch cluster without writing YAML or running kubectl.
 (once GitHub Pages is enabled on this repo — see below). It's still showing sample
 data until Task 1 is actually run.
 
-[![The presentation site, scrolled to the install journey section](docs/screenshots/hero.png)](https://nicopavez.github.io/control-plane-eck/)
-
 **Status: work in progress.** The findings and charts above and below are
 placeholders until Task 1 is actually run (see `setup/`) and the prototype is
 exercised against a real cluster. Nothing here claims to be a finished result yet.
@@ -67,17 +65,6 @@ Docker daemon there).
 `.github/workflows/pages.yml` builds and deploys `site/` to GitHub Pages on every
 push to `main`. One-time setup: in this repo's Settings -> Pages, set **Source** to
 **GitHub Actions**. After that the live-demo link above stays current automatically.
-
-## Security notes
-
-- No secrets are ever committed. Kubernetes credentials and TLS certs are read
-  live from the cluster by `packages/api` and never written to disk, logs, or git.
-- Configuration is environment variables only (`.env`, gitignored; see
-  `.env.example` for the documented keys). `packages/api` validates required env
-  vars at startup and fails fast rather than silently defaulting.
-- `setup/metrics.json` is scrubbed of secret-shaped values before being written.
-- CI (`.github/workflows/ci.yml`) runs lint, typecheck, build, and tests on every
-  push; GitHub's secret scanning stays on for this public repo.
 
 ## License
 
