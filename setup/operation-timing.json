@@ -1,0 +1,10 @@
+{
+  "measuredAt": "FILL IN: ISO timestamp when you did this timing pass",
+  "entries": [
+    { "operation": "status_dashboard", "label": "Check cluster health", "kubectlSeconds": 0, "tuiSeconds": 0, "notes": "time kubectl get elasticsearch + describe + get pods vs opening the Dashboard screen" },
+    { "operation": "fetch_credentials", "label": "Fetch credentials + CA", "kubectlSeconds": 0, "tuiSeconds": 0, "notes": "time the two kubectl get secret commands vs the Credentials screen" },
+    { "operation": "scale_nodeset", "label": "Scale a NodeSet", "kubectlSeconds": 0, "tuiSeconds": 0, "notes": "" },
+    { "operation": "version_upgrade", "label": "Version upgrade with progress", "kubectlSeconds": 0, "tuiSeconds": 0, "notes": "" },
+    { "operation": "index_management", "label": "Create + inspect an index", "kubectlSeconds": 0, "tuiSeconds": 0, "notes": "" }
+  ]
+}

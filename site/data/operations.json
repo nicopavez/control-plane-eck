@@ -1,0 +1,38 @@
+[
+  {
+    "operation": "status_dashboard",
+    "label": "Health/status dashboard",
+    "painPoint": "CR status is opaque; today you kubectl describe and parse by hand",
+    "relatedProblemRank": null
+  },
+  {
+    "operation": "fetch_credentials",
+    "label": "Fetch credentials + CA",
+    "painPoint": "Non-obvious secret naming and base64 decoding",
+    "relatedProblemRank": 2
+  },
+  {
+    "operation": "scale_nodeset",
+    "label": "Scale a NodeSet",
+    "painPoint": "Scaling semantics (StatefulSet mapping) aren't obvious from the CR alone",
+    "relatedProblemRank": null
+  },
+  {
+    "operation": "version_upgrade",
+    "label": "Version upgrade with live progress",
+    "painPoint": "Upgrade is editing one YAML field with zero feedback",
+    "relatedProblemRank": null
+  },
+  {
+    "operation": "index_management",
+    "label": "Index management",
+    "painPoint": "ECK explicitly does not manage indices at all, this is a real gap",
+    "relatedProblemRank": null
+  },
+  {
+    "operation": "snapshot_restore",
+    "label": "Snapshot trigger/restore",
+    "painPoint": "Backup/restore is entirely left to the operator, no CRD support",
+    "relatedProblemRank": null
+  }
+]

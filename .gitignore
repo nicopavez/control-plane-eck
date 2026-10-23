@@ -1,0 +1,30 @@
+# dependencies / build output
+node_modules/
+dist/
+build/
+.next/
+out/
+coverage/
+
+# env and local secrets
+.env
+.env.local
+*.kubeconfig
+kubeconfig*.yaml
+
+# raw local run artifacts (the cleaned, scrubbed setup/metrics.json is committed on purpose)
+setup/*.raw.log
+setup/*.local.json
+
+# editor / OS
+.vscode/
+.DS_Store
+Thumbs.db
+
+# personal, never for the public repo
+HANDOFF.md
+interview-prep.md
+interview_script.md
+qa-prep.md
+speaker-notes.md
+site/tsconfig.tsbuildinfo

@@ -1,0 +1,20 @@
+[
+  {
+    "stat": "PLACEHOLDER",
+    "label": "GPU cloud market size or growth rate relevant to ECK's addressable buyers",
+    "source": "",
+    "sourceUrl": ""
+  },
+  {
+    "stat": "PLACEHOLDER",
+    "label": "Share of ML infra teams running Elasticsearch or similar stateful workloads on Kubernetes",
+    "source": "",
+    "sourceUrl": ""
+  },
+  {
+    "stat": "PLACEHOLDER",
+    "label": "Reported operator time spent on manual YAML/kubectl cluster operations per week",
+    "source": "",
+    "sourceUrl": ""
+  }
+]

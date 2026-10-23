@@ -1,0 +1,638 @@
+/* Palette, tokens and theming follow the dataviz skill's reference instance
+   (dataviz/references/palette.md). Light values live at :root; dark values
+   are redefined both under the OS media query and under an explicit
+   [data-theme="dark"] toggle stamp, so the toggle always wins over OS. */
+
+:root {
+  color-scheme: light;
+
+  --surface-page: #f9f9f7;
+  --surface-chart: #fcfcfb;
+  --text-primary: #0b0b0b;
+  --text-secondary: #52514e;
+  --text-muted: #898781;
+  --gridline: #e1e0d9;
+  --axis-line: #c3c2b7;
+  --border: rgba(11, 11, 11, 0.1);
+  --chart-track: #e1e0d9;
+
+  --series-1: #2a78d6;
+  --series-2: #eb6834;
+  --series-3: #1baf7a;
+  --series-4: #eda100;
+  --series-5: #e87ba4;
+  --series-6: #008300;
+  --series-7: #6250d6;
+  --series-8: #e34948;
+
+  --status-good: #0ca30c;
+  --status-warning: #fab219;
+  --status-serious: #ec835a;
+  --status-critical: #d03b3b;
+
+  --fill-on-color: #ffffff;
+  --fill-on-yellow: #0b0b0b;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:where(:not([data-theme="light"])) {
+    color-scheme: dark;
+
+    --surface-page: #0d0d0d;
+    --surface-chart: #1a1a19;
+    --text-primary: #f0efec;
+    --text-secondary: #c3c2b7;
+    --text-muted: #898781;
+    --gridline: #2c2c2a;
+    --axis-line: #383835;
+    --border: rgba(255, 255, 255, 0.1);
+    --chart-track: #2c2c2a;
+
+    --series-1: #3987e5;
+    --series-2: #d95926;
+    --series-3: #199e70;
+    --series-4: #c98500;
+    --series-5: #d55181;
+    --series-6: #008300;
+    --series-7: #9085e9;
+    --series-8: #e66767;
+  }
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  --surface-page: #0d0d0d;
+  --surface-chart: #1a1a19;
+  --text-primary: #f0efec;
+  --text-secondary: #c3c2b7;
+  --text-muted: #898781;
+  --gridline: #2c2c2a;
+  --axis-line: #383835;
+  --border: rgba(255, 255, 255, 0.1);
+  --chart-track: #2c2c2a;
+
+  --series-1: #3987e5;
+  --series-2: #d95926;
+  --series-3: #199e70;
+  --series-4: #c98500;
+  --series-5: #d55181;
+  --series-6: #008300;
+  --series-7: #9085e9;
+  --series-8: #e66767;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+body {
+  margin: 0;
+  background: var(--surface-page);
+  color: var(--text-primary);
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  line-height: 1.5;
+}
+
+code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.9em;
+}
+
+a {
+  color: var(--series-1);
+}
+
+/* ---------- sample-data banner ---------- */
+
+.sample-banner {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--status-warning);
+  color: #0b0b0b;
+  text-align: center;
+  padding: 10px 16px;
+  font-size: 0.9rem;
+}
+
+.sample-banner strong {
+  font-weight: 700;
+}
+
+/* ---------- header ---------- */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 24px;
+  background: var(--surface-page);
+  border-bottom: 1px solid var(--border);
+}
+
+.site-title {
+  margin: 0;
+  font-weight: 600;
+}
+
+.theme-toggle {
+  border: 1px solid var(--border);
+  background: var(--surface-chart);
+  color: var(--text-primary);
+  border-radius: 8px;
+  padding: 6px 12px;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.theme-toggle:hover {
+  border-color: var(--axis-line);
+}
+
+/* ---------- scrollytelling shell ---------- */
+
+.scrolly-section,
+.close-section {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 64px 24px;
+  border-top: 1px solid var(--border);
+}
+
+.scrolly-section:first-of-type {
+  border-top: none;
+}
+
+.scrolly-section-header {
+  margin-bottom: 32px;
+  max-width: 640px;
+}
+
+.eyebrow {
+  margin: 0 0 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.scrolly-section-header h2 {
+  margin: 0;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+}
+
+.scrolly-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 32px;
+  align-items: start;
+}
+
+.scrolly-sticky-col {
+  min-width: 0;
+}
+
+.scrolly-sticky-panel {
+  position: sticky;
+  top: 96px;
+}
+
+.scrolly-steps-col {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  min-width: 0;
+}
+
+.scrolly-step {
+  min-height: 55vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px 0;
+  opacity: 0.45;
+  transition: opacity 250ms ease;
+}
+
+.scrolly-step.is-active {
+  opacity: 1;
+}
+
+.scrolly-step h3 {
+  margin: 4px 0 8px;
+  font-size: 1.2rem;
+}
+
+.scrolly-step p {
+  margin: 0 0 8px;
+  color: var(--text-secondary);
+}
+
+.step-index {
+  margin: 0 0 4px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.step-error {
+  color: var(--status-critical);
+  font-size: 0.9rem;
+}
+
+.is-error {
+  color: var(--status-critical);
+}
+
+.is-placeholder {
+  color: var(--text-muted);
+  font-style: italic;
+  border-left: 2px dashed var(--axis-line);
+  padding-left: 10px;
+}
+
+@media (max-width: 880px) {
+  .scrolly-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .scrolly-sticky-panel {
+    top: 76px;
+  }
+
+  .scrolly-step {
+    min-height: 0;
+    opacity: 1;
+  }
+}
+
+/* ---------- chart frame (shared by every chart) ---------- */
+
+.chart-frame {
+  background: var(--surface-chart);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.chart-frame-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.chart-frame-head h3 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.chart-frame-body {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.chart-provenance {
+  margin: 14px 0 0;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.chart-provenance-sample {
+  color: var(--status-warning);
+  font-weight: 600;
+}
+
+.chart-note {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+/* ---------- legend ---------- */
+
+.chart-legend {
+  display: flex;
+  gap: 16px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+}
+
+.chart-legend li {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.chart-legend-swatch {
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+  display: inline-block;
+}
+
+/* ---------- svg bar primitives ---------- */
+
+.chart-track {
+  fill: var(--chart-track);
+}
+
+.bar-row-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  overflow: visible;
+}
+
+.bar-value-label {
+  fill: var(--text-secondary);
+  font-size: 11px;
+}
+
+/* ---------- install journey ---------- */
+
+.journey-svg {
+  width: 100%;
+  height: 40px;
+  display: block;
+  overflow: visible;
+}
+
+.journey-segment {
+  transition: x 350ms ease, width 350ms ease;
+}
+
+.journey-step-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 260px;
+  overflow-y: auto;
+}
+
+.journey-row {
+  display: grid;
+  grid-template-columns: 20px 1fr auto;
+  align-items: baseline;
+  gap: 8px;
+  font-size: 0.88rem;
+}
+
+.journey-icon {
+  color: var(--status-good);
+  font-weight: 700;
+}
+
+.journey-row-error .journey-icon {
+  color: var(--status-critical);
+}
+
+.journey-duration {
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.journey-error {
+  grid-column: 2 / -1;
+  margin: 0;
+  color: var(--status-critical);
+  font-size: 0.82rem;
+}
+
+/* ---------- ranked problems ---------- */
+
+.ranked-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.ranked-row {
+  border-radius: 8px;
+  padding: 10px;
+  transition: background 200ms ease;
+}
+
+.ranked-row.is-active {
+  background: var(--gridline);
+}
+
+.ranked-row-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 4px;
+}
+
+.rank-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--series-1);
+  color: var(--fill-on-color);
+  font-size: 0.75rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.ranked-row-head h4 {
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.ranked-rationale {
+  margin: 0 0 8px;
+  color: var(--text-secondary);
+  font-size: 0.88rem;
+}
+
+/* ---------- operations rationale diagram ---------- */
+
+.operations-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 12px;
+}
+
+.operation-card {
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--text-muted);
+  border-radius: 8px;
+  padding: 12px;
+  background: var(--surface-page);
+  transition: box-shadow 200ms ease, border-color 200ms ease;
+}
+
+.operation-card.is-active {
+  box-shadow: 0 0 0 2px var(--axis-line) inset;
+}
+
+.operation-card h4 {
+  margin: 0 0 6px;
+  font-size: 0.9rem;
+}
+
+.operation-pain {
+  margin: 0 0 8px;
+  color: var(--text-secondary);
+  font-size: 0.82rem;
+}
+
+.operation-link {
+  margin: 0;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.operation-link-muted {
+  color: var(--text-muted);
+  font-weight: 400;
+}
+
+/* ---------- before / after timing ---------- */
+
+.timing-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.timing-row {
+  border-radius: 8px;
+  padding: 8px;
+  transition: background 200ms ease;
+}
+
+.timing-row.is-active {
+  background: var(--gridline);
+}
+
+.timing-row-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.timing-row-head h4 {
+  margin: 0;
+  font-size: 0.92rem;
+}
+
+.timing-delta {
+  color: var(--status-good);
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.timing-notes {
+  margin: 6px 0 0;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+/* ---------- stat tiles ---------- */
+
+.stat-tile {
+  padding: 24px;
+  border-radius: 12px;
+  background: var(--surface-chart);
+  border: 1px solid var(--border);
+}
+
+.stat-value {
+  margin: 0 0 8px;
+  font-size: clamp(2rem, 6vw, 3rem);
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.stat-label {
+  margin: 0 0 10px;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+}
+
+.stat-source {
+  margin: 0;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.stat-tile-placeholder {
+  border-style: dashed;
+  border-color: var(--axis-line);
+}
+
+.stat-tile-placeholder .stat-value {
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.stat-source-placeholder {
+  color: var(--status-warning);
+  font-weight: 600;
+}
+
+.stat-value-inline {
+  font-weight: 600;
+  font-size: 1.1rem;
+  margin: 0 0 4px;
+}
+
+/* ---------- close section ---------- */
+
+.close-body {
+  max-width: 680px;
+  color: var(--text-secondary);
+}
+
+.close-body p,
+.close-body li {
+  font-size: 1rem;
+}
+
+.close-body ul {
+  padding-left: 20px;
+}
+
+.handoff-line {
+  margin-top: 28px;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}

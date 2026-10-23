@@ -1,0 +1,33 @@
+{
+  "sample": true,
+  "measuredAt": "2026-01-01T00:00:00Z",
+  "entries": [
+    {
+      "operation": "status_dashboard",
+      "label": "Health/status dashboard",
+      "kubectlSeconds": 54.0,
+      "tuiSeconds": 3.0,
+      "notes": "kubectl time includes describe + manually reading conditions across the CR and its NodeSets"
+    },
+    {
+      "operation": "fetch_credentials",
+      "label": "Fetch credentials + CA",
+      "kubectlSeconds": 41.0,
+      "tuiSeconds": 4.0,
+      "notes": "kubectl time includes locating the generated secret name and base64-decoding three fields"
+    },
+    {
+      "operation": "scale_nodeset",
+      "label": "Scale a NodeSet",
+      "kubectlSeconds": 38.0,
+      "tuiSeconds": 9.0
+    },
+    {
+      "operation": "version_upgrade",
+      "label": "Version upgrade with live progress",
+      "kubectlSeconds": 67.0,
+      "tuiSeconds": 12.0,
+      "notes": "kubectl time includes repeated manual polling to see if the upgrade is progressing"
+    }
+  ]
+}

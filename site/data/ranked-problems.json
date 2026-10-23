@@ -1,0 +1,14 @@
+[
+  {
+    "rank": 1,
+    "title": "PLACEHOLDER — fill in after Task 1",
+    "rationale": "PLACEHOLDER — replace with the top install/operations friction point found during the real run, with its supporting observation.",
+    "evidenceStepName": "wait_cluster_green_first_attempt"
+  },
+  {
+    "rank": 2,
+    "title": "PLACEHOLDER — fill in after Task 1",
+    "rationale": "PLACEHOLDER — replace with the second-ranked friction point.",
+    "evidenceStepName": "fetch_credentials"
+  }
+]
